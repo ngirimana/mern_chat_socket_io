@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const Chat = require('../models/chatModel');
+const Chat = require("../models/chatModel");
 const User = require("../models/userModel");
 
 /**
@@ -58,7 +58,7 @@ const accessChat = asyncHandler(async (req, res) => {
  * @description     Fetch all chats for a user
  * @route           GET /api/chat/
  * @access          Protected
-*/
+ */
 
 const fetchChats = asyncHandler(async (req, res) => {
   try {
@@ -94,7 +94,7 @@ const createGroupChat = asyncHandler(async (req, res) => {
   const users = JSON.parse(req.body.users);
 
   if (users.length < 2) {
-    return res  
+    return res
       .status(400)
       .send("More than 2 users are required to form a group chat");
   }
@@ -148,4 +148,34 @@ const renameGroup = asyncHandler(async (req, res) => {
     res.json(updatedChat);
   }
 });
-module.exports = { accessChat, fetchChats, createGroupChat, renameGroup };
+
+/**
+ * @desc    Add user to Group / Leave
+ *  @route   PUT /api/chat/groupadd
+ *  @access  Protected
+ * */
+
+const addToGroup = asyncHandler(async (req, res) => {
+  const { chatId, userId } = req.body;
+
+  const added = await Chat.findByIdAndUpdate(
+    chatId,
+    {
+      $push: { users: userId },
+    },
+    {
+      new: true,
+    }
+  )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+
+  if (!added) {
+    res.status(404);
+    throw new Error("Chat Not Found");
+  } else {
+    res.json(added);
+  }
+});
+
+module.exports = { accessChat, fetchChats, createGroupChat, renameGroup,addToGroup };
