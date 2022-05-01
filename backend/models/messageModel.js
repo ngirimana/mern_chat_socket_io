@@ -12,9 +12,7 @@ const messageModel = mongoose.Schema(
       ref: "Chat",
     },
   },
-  {
-    timesStamps: true,
-  }
+  { timestamps: true }
 );
 
 

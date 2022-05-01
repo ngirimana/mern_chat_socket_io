@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 
-const userSchema  = mongoose.Schema(
+const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -10,7 +10,7 @@ const userSchema  = mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique:true,
+      unique: true,
     },
     password: {
       type: String,
@@ -23,9 +23,7 @@ const userSchema  = mongoose.Schema(
         "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
   },
-  {
-    timesStamps: true,
-  }
+  { timestamps: true }
 );
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
