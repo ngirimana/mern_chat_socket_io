@@ -1,9 +1,8 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Box, Text } from "@chakra-ui/layout";
 
-
-const UserListItem = ({user, handleFunction }) => {
- return (
+const UserListItem = ({ user, handleFunction }) => {
+  return (
     <Box
       onClick={handleFunction}
       cursor="pointer"
@@ -40,4 +39,3 @@ const UserListItem = ({user, handleFunction }) => {
 };
 
 export default UserListItem;
-
