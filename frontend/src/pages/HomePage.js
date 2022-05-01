@@ -1,9 +1,26 @@
-import React from 'react'
-import { Box, Container, Text, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import Login from '../components/authentication/Login';
-import Signup from '../components/authentication/Signup';
+import React, { useEffect } from "react";
+import {
+  Box,
+  Container,
+  Text,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
+import Login from "../components/authentication/Login";
+import Signup from "../components/authentication/Signup";
 
-const HomePage=()=> {
+const HomePage = () => {
+  const history = useHistory();
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (!userInfo) {
+      history.push("/");
+    }
+  }, [history]);
   return (
     <Container maxW="xl" centerContent>
       <Box
@@ -36,15 +53,15 @@ const HomePage=()=> {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <Login/>
+              <Login />
             </TabPanel>
             <TabPanel>
-              <Signup/>
+              <Signup />
             </TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
     </Container>
   );
-}
+};
 export default HomePage;
