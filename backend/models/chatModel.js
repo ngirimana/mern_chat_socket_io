@@ -6,9 +6,9 @@ const chatModel = mongoose.Schema(
       type: String,
       trim: true,
     },
-    isGroup: {
+    isGroupChat: {
       type: Boolean,
-      default: false,
+      default: false
     },
     users: [
       {

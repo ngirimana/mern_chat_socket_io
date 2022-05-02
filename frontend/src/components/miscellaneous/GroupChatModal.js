@@ -30,7 +30,7 @@ const GroupChatModal = ({ children }) => {
 
   const { user, chats, setChats } = ChatState();
 
-  const handleGroup = (userToAdd) => {
+  const  handleGroup = (userToAdd) => {
     if (selectedUsers.includes(userToAdd)) {
       toast({
         title: "User already added",
@@ -104,9 +104,11 @@ const GroupChatModal = ({ children }) => {
         },
         config
       );
+      console.log(data)
       setChats([data, ...chats]);
+      console.log(chats)
       onClose();
-      toast({
+      toast({ 
         title: "New Group Chat Created!",
         status: "success",
         duration: 5000,
@@ -151,7 +153,7 @@ const GroupChatModal = ({ children }) => {
             </FormControl>
             <FormControl>
               <Input
-                placeholder="Add Users eg: John, Piyush, Jane"
+                placeholder="Add Users eg: John, "
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />
