@@ -9,12 +9,14 @@ import ChatProvider from './context/ChatProvider';
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <ChatProvider>
-    <BrowserRouter>
+  
+  <BrowserRouter>
+    <ChatProvider>
       <ChakraProvider>
         <App />
-      </ChakraProvider>
+    </ChakraProvider>
+     </ChatProvider>
     </BrowserRouter>
-  </ChatProvider>
+ 
 );
 
