@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
+const path = require("path");
 const chats = require("./data/data");
 const connectDb = require("./config/config");
 const userRoutes = require("./routes/userRoutes");
@@ -13,12 +14,20 @@ connectDb();
 const app = express();
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("API is running successfully");
-});
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
+/**
+ * @description production
+ */
+
+const __dirname1 = path.resolve();
+
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
 
 app.use(notFound);
 app.use(errorHandler);
