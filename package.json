@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+     "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
   },
   "author": "NGIRIMANA Schadrack",
   "license": "ISC",
